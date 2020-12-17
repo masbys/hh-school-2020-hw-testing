@@ -28,4 +28,18 @@ public class RestClientTest {
         String regex = ".*[pP][rR][oO].*";
         assertTrue(Pattern.matches(regex,string));
     }
+
+    @Test
+    public void checkSynonym() {
+        String string = restClient.makeRequest("pr-manager", Token.VALUE);
+        String regex = ".*[pP][rR]-мене.*";
+        assertTrue(Pattern.matches(regex,string));
+    }
+
+    @Test
+    public void checkNOT() {
+        String string = restClient.makeRequest("pepsi"+ "NOT" + "cola", Token.VALUE);
+        String regex = ".*[pP][rR]-мене.*";
+        assertTrue(Pattern.matches(regex,string));
+    }
 }
