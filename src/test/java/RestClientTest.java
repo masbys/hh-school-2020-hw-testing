@@ -39,7 +39,7 @@ public class RestClientTest {
     @Test
     public void checkNOT() {
         String string = restClient.makeRequest("pepsi"+ "NOT" + "cola", Token.VALUE);
-        String regex = ".*[pP][rR]-мене.*";
+        String regex = ".*[^cC][^oO][^lL][^aA].*";
         assertTrue(Pattern.matches(regex,string));
     }
 }
