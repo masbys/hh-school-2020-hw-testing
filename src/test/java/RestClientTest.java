@@ -1,5 +1,9 @@
 import org.junit.Test;
 
+import javax.xml.ws.Response;
+
+import java.util.regex.Pattern;
+
 import static org.junit.Assert.*;
 
 public class RestClientTest {
@@ -8,6 +12,20 @@ public class RestClientTest {
 
     @Test
     public void javaResponseNotEmpty() {
-        assertTrue(restClient.makeRequest("java", Token.VALUE).length() > 0);
+        assertTrue(restClient.makeRequest("", Token.VALUE).length() > 0);
+    }
+
+    @Test
+    public void checkAnywhereInDocument() {
+        String string = restClient.makeRequest("Medical" + "Manager", Token.VALUE);
+        String regex = ".*Medical .+Manager.*";
+        assertTrue(Pattern.matches(regex,string));
+    }
+
+    @Test
+    public void checkCamouflageSymbol() {
+        String string = restClient.makeRequest("pro*", Token.VALUE);
+        String regex = ".*[pP][rR][oO].*";
+        assertTrue(Pattern.matches(regex,string));
     }
 }
